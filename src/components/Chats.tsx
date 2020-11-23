@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Grid } from "@material-ui/core";
+import { FIREBASE_URL } from "../constants";
+
+interface Message {
+    from: string;
+    sent: string;
+    content: string;
+    attachment: string;
+}
 
 export default function Chats() {
+    const [messages, setMessages]: [Message[], Function] = useState([]);
+
+    axios
+        .get(`${FIREBASE_URL}/chats/test`)
+        .then((result) => {
+            setMessages(result.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
     return (
         <Grid container spacing={3}>
             <Grid item xs={3}>
@@ -9,6 +29,9 @@ export default function Chats() {
             </Grid>
             <Grid item xs={9}>
                 <h1>Messages</h1>
+                {messages.map((message) => (
+                    <p>{JSON.stringify(message)}</p>
+                ))}
             </Grid>
         </Grid>
     );
