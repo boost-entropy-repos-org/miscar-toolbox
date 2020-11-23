@@ -1,22 +1,20 @@
-import React from 'react';
-import {createMuiTheme} from '@material-ui/core/styles';
-import './App.css';
+import React from "react";
+import { createMuiTheme } from "@material-ui/core/styles";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import Chats from "./components/Chats";
 
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#7e0c2b'
-        }
-    }
-})
+            main: "#7e0c2b",
+        },
+    },
+});
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <h1>
-                MisCar
-            </h1>
+            <Chats />
         </ThemeProvider>
     );
 }
