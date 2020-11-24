@@ -13,14 +13,16 @@ interface Message {
 export default function Chats() {
     const [messages, setMessages]: [Message[], Function] = useState([]);
 
-    axios
-        .get(`${FIREBASE_URL}/chats/test`)
-        .then((result) => {
-            setMessages(result.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    if (messages.length === 0) {
+        axios
+            .get(`${FIREBASE_URL}/chats/test`)
+            .then((result) => {
+                setMessages(result.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     return (
         <Grid container spacing={3}>
