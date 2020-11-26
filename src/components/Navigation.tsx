@@ -7,6 +7,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import "./Navigation.scss";
 import { IconButton } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import firebase from "firebase";
 
 export default function Navigation() {
     return (
@@ -54,9 +56,26 @@ export default function Navigation() {
                         Wiki
                     </Button>
                     <div className="nav-right">
-                        <IconButton>
-                            <AccountCircle />
-                        </IconButton>
+                        <FirebaseAuthConsumer>
+                            {({ isSignedIn, user }) => {
+                                if (!isSignedIn)
+                                    return (
+                                        <IconButton
+                                            onClick={() => {
+                                                const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+                                                firebase.auth().signInWithPopup(googleAuthProvider);
+                                            }}
+                                        >
+                                            <AccountCircle className="nav-profile" />
+                                        </IconButton>
+                                    );
+                                return (
+                                    <IconButton>
+                                        <img src={user.photoURL} className="nav-profile" />
+                                    </IconButton>
+                                );
+                            }}
+                        </FirebaseAuthConsumer>
                     </div>
                 </Toolbar>
             </AppBar>

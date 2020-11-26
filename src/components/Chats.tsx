@@ -32,7 +32,7 @@ export default function Chats() {
             <Grid item xs={9}>
                 <h1>Messages</h1>
                 {messages.map((message) => (
-                    <p>{JSON.stringify(message)}</p>
+                    <p key={message.sent}>{JSON.stringify(message)}</p>
                 ))}
             </Grid>
         </Grid>
