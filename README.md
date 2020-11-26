@@ -1,4 +1,4 @@
-# MisCar Web Application
+# MisCar Toolbox
 The project is (funny enough) not affiliated with MisCar currently.
 
 ## Setting Up
