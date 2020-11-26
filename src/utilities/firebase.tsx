@@ -1,8 +1,5 @@
-import firebase from "firebase";
-import User = firebase.User;
-
-export function withToken(user: User): Promise<string> {
-    return user.getIdToken().then((token) => {
-        return "Bearer: " + token;
+export function withToken(user: any): Promise<string> {
+    return user.getIdToken().then((token: string) => {
+        return "Bearer " + token;
     });
 }

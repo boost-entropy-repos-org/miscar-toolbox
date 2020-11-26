@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
 import { FIREBASE_URL } from "../constants";
+import { withToken } from "../utilities/firebase";
 
 interface Message {
     from: string;
@@ -10,18 +11,20 @@ interface Message {
     attachment: string;
 }
 
-export default function Chats() {
+const Chats = (props: { user: any }) => {
     const [messages, setMessages]: [Message[], Function] = useState([]);
 
     if (messages.length === 0) {
-        axios
-            .get(`${FIREBASE_URL}/chats/test`)
-            .then((result) => {
-                setMessages(result.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        withToken(props.user).then((token) => {
+            axios
+                .get(`${FIREBASE_URL}/chats/test`, { headers: { authorization: token } })
+                .then((result) => {
+                    setMessages(result.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
     }
 
     return (
@@ -37,4 +40,6 @@ export default function Chats() {
             </Grid>
         </Grid>
     );
-}
+};
+
+export default Chats;

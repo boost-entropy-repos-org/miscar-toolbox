@@ -15,7 +15,9 @@ export default function Navigation() {
         <div className="nav">
             <AppBar>
                 <Toolbar>
-                    <Typography variant="h6">MisCar Toolbox</Typography>
+                    <Typography variant="h6" component={Link} to="/" className="nav-brand">
+                        MisCar Toolbox
+                    </Typography>
                     <Button
                         component={Link}
                         to="/chats"
