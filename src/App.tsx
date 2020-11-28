@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import Chats from "./components/Chats";
-import { FirebaseAuthConsumer, FirebaseAuthProvider, IfFirebaseAuthed } from "@react-firebase/auth";
+import { FirebaseAuthProvider, IfFirebaseAuthed } from "@react-firebase/auth";
 import { FIREBASE_CONFIGURATION } from "./constants";
 import Navigation from "./components/Navigation";
 
@@ -17,6 +17,7 @@ const theme = createMuiTheme({
         secondary: {
             main: "#222222",
         },
+        type: "dark",
     },
 });
 

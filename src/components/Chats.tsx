@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
 import { FIREBASE_URL } from "../constants";
 import { withToken } from "../utilities/firebase";
+import MessageComponent from "./chats/Message";
 
-interface Message {
+export interface Message {
     from: string;
     sent: string;
     content: string;
@@ -35,7 +36,7 @@ const Chats = (props: { user: any }) => {
             <Grid item xs={9}>
                 <h1>Messages</h1>
                 {messages.map((message) => (
-                    <p key={message.sent}>{JSON.stringify(message)}</p>
+                    <MessageComponent key={message.sent} message={message} />
                 ))}
             </Grid>
         </Grid>
